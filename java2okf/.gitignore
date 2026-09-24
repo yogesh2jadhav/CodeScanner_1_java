@@ -1,0 +1,17 @@
+# Build output
+target/
+
+# Generated knowledge bundles and logs
+output/
+logs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Base logging configuration. The console appender writes to stderr so that
+  machine-readable command output on stdout (validate/stats reports) is never
+  interleaved with log lines. The file appender and effective levels are added
+  at runtime by com.java2okf.util.LoggingConfigurer from java2okf.yaml.
+-->
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%-5level %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Third-party libraries are only interesting when they misbehave. -->
+    <logger name="com.github.javaparser" level="WARN"/>
+
+    <logger name="com.java2okf" level="INFO"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

@@ -1,0 +1,55 @@
+# Java2OKF configuration.
+# Relative paths are resolved against the current working directory.
+# Every value can be overridden by a CLI option (CLI always wins).
+
+project:
+  name: sample-project
+  sourceRoot: ./examples/sample-project
+
+output:
+  directory: ./output
+  cleanBeforeGenerate: false
+
+analysis:
+  includeTests: false
+  includeGeneratedSources: false
+  resolveSymbols: true
+  analyzeMethodCalls: true
+  analyzeDependencies: true
+  analyzeInheritance: true
+  analyzeAnnotations: true
+  analyzeFields: true
+  analyzeConstructors: true
+  analyzeLocalVariables: true
+  analyzeObjectCreation: true
+  # Optional jars used only for symbol resolution (never executed).
+  classpath: []
+
+scanner:
+  extensions:
+    - .java
+
+  excludeDirectories:
+    - target
+    - build
+    - out
+    - generated
+    - .git
+
+okf:
+  version: "0.2"
+  generateIndexes: true
+  generateLogs: true
+  generateClassDocuments: true
+  generateMethodDocuments: true
+  includeProvenance: true
+  includeGenerationTimestamp: true
+
+logging:
+  level: INFO
+  file: ./logs/java2okf.log
+  console: true
+
+performance:
+  parallelAnalysis: true
+  threadCount: 0
