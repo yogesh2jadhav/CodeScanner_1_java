@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.regex.Pattern;
 
 import static com.java2okf.testutil.TestProjects.write;
 import static com.java2okf.testutil.TestProjects.writeJava;
@@ -83,8 +84,9 @@ class CliTest {
         Run stats = run("stats", "--bundle", output.toString());
         assertEquals(0, stats.exitCode(), stats.err());
         assertTrue(stats.out().contains("Java2OKF Statistics"));
-        assertTrue(stats.out().matches("(?s).*Classes\\s+: 1\\n.*"), stats.out());
-        assertTrue(stats.out().matches("(?s).*Methods\\s+: 2\\n.*"), stats.out());
+        // (?m) with $ accepts both \n and \r\n, so the check also holds on Windows.
+        assertTrue(Pattern.compile("(?m)^Classes\\s+: 1$").matcher(stats.out()).find(), stats.out());
+        assertTrue(Pattern.compile("(?m)^Methods\\s+: 2$").matcher(stats.out()).find(), stats.out());
     }
 
     @Test
